@@ -1,0 +1,94 @@
+.contenedor{
+  width: 100%;
+  text-align: center;
+}
+
+h1{
+  font-size: 50px;
+}
+
+.mat-toolbar{
+padding: 0;
+}
+
+.nav{
+background-color: white;
+box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+width: 100%;
+z-index: 100;
+}
+
+nav ul{
+margin: 0 auto;
+padding: 0;
+width: 70%;
+}
+
+nav a{
+display: block;
+padding: 16px 16px;
+text-align: center;
+text-decoration: none;
+}
+
+.active{
+background-color: #677D8B;
+color: white;
+}
+
+.active a{
+color: white;
+}
+
+.active a:link{
+color: white;
+}
+
+nav a:hover {
+color: #039be5;
+background-color: #CFD8DC;
+
+}
+
+th, td {
+text-align: center;
+padding: 8px;
+}
+
+.toolbar{
+width: 70%;
+margin: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+nav ul{
+  width: 100%;
+}
+
+nav ul li{
+  width: 33.3333%;
+}
+
+nav ul li a{
+    height: 100%;
+}
+}
+
+@media only screen and (max-width: 425px) {
+a.mat-button{
+  white-space: normal;
+  line-height: initial;
+}
+}
+
+@media only screen and (max-width: 375px) {
+nav{
+    max-width: 375px;
+}
+}
+
+ul{
+  list-style: none !important;
+  display: flex !important;
+}
+

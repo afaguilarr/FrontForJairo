@@ -1,0 +1,102 @@
+<br>
+<section *ngIf="windows.isColDemoInit" class="mat-typography title">        
+    <h1>Colaborador: {{this.collaboratorDemo.name}}</h1>
+</section>
+<br>
+<br>
+<div [hidden]="!windows.collaboratorDemo">
+    <div class="table-container">
+        <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilterC($event.target.value)" placeholder="Search Detail">
+          </mat-form-field>
+        </div>
+
+        <div class="example-container mat-elevation-z2 ">
+
+          <mat-table [dataSource]="dataSourceCollaborator" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> <strong>Nombre</strong></mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.topic}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Descripción</strong></mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+            </ng-container>
+
+           
+            <ng-container matColumnDef="Date of Creation">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Fecha de Creación</strong> </mat-header-cell>
+              <mat-cell *matCellDef="let element"><p align="left" >{{element.createdAt}} </p></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="link">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Link</strong> </mat-header-cell>
+              <mat-cell  *matCellDef="let element"><a align="center" href=".">Origen</a></mat-cell>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Borrar Tema</strong></mat-header-cell>
+              <mat-cell *matCellDef="let element">  
+                <a mat-button class="icon-container black-text" (click)="deleteDetail(element.topic)">
+                    <i class="material-icons edition-icons">delete</i>
+                </a> 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expertise">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Experiencia</strong></mat-header-cell>
+              <mat-cell *matCellDef="let element"  >  
+                <div *ngIf="element.expertise === 1" class="button-row" >
+                    <button mat-icon-button>
+                        <i class="material-icons">grade</i>
+                    </button>
+                    <button mat-icon-button>
+                        <i class="material-icons">grade</i>
+                    </button>
+                    <button mat-icon-button (click)="updateDetail(element.id, 2)">
+                        <mat-icon class="material-icons" aria-label="icon-button">star_border</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="element.expertise === 2">
+                    <button mat-icon-button>
+                        <i class="material-icons">grade</i>
+                    </button>
+                    <button mat-icon-button (click)="updateDetail(element.id, 1)">
+                        <i class="material-icons">grade</i>
+                    </button>
+                    <button mat-icon-button>
+                        <i class="material-icons">grade</i>
+                    </button>                
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumsCollaborator"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumsCollaborator;">
+            </mat-row>
+            
+          </mat-table>
+
+          <mat-paginator #paginator (page)="pageEvent = loadPaginatorData($event)" [length]="dataSourceCollaborator.data.length" 
+                [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+
+        </div>
+        <br>
+        <div class="button-row">
+            <button mat-raised-button (click)="addDetailDialog()"  color="#CFD8DC">Agregar Tema</button>
+        </div>
+
+        <br>
+
+    </div>    
+</div>
+
+

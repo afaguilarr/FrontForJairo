@@ -1,0 +1,82 @@
+example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-icon-button{
+    padding-left: 3px;
+}
+
+a {
+    color:"grey";
+    text-decoration: none;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+createTopic-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+#left{
+    float: left;
+    margin-right: 40px;
+}
+#right{
+   float: left;
+}
+
+.title{
+    position:absolute;
+    left: 140px;
+}
+
+/***************************
+Pulls the stars container to the left
+***************************/
+.rating {
+    float:left;
+}
+/***************************
+Hides the radio buttons
+***************************/
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+/***************************
+Default stars styles
+***************************/
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+}
+.table-container{
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,143 @@
+<form #detailForm="ngForm">
+    <div [formGroup]="addDetailForm" [hidden]="!windows.showDefaultCreateDetail">
+      <h2>Agregar Tema</h2>
+      <mat-form-field>
+        <input matInput [matAutocomplete]="auto" placeholder="Nombre" name="topic" formControlName="topic" 
+            required [(ngModel)]="detail.topic">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option (onSelectionChange)="setTopic($event)" *ngFor="let topic of filteredTopics | async" [value]="topic">
+                <span>{{topic}}</span>
+            </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <br>
+    <p style="color:red;" *ngIf="detailExists">El Detalle ya existe</p>
+    <p>{{selectedTopicDescription}}</p>
+    
+    <div *ngIf="detail.expertise === undefined || (!this.canFillOneStar && detail.expertise === 0)" class="button-row" >
+            <button mat-icon-button (click)="selectStars(0)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+            <button mat-icon-button (click)="selectStars(1)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+            <button mat-icon-button (click)="selectStars(2)">
+                    <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+    </div>
+
+    <div *ngIf="detail.expertise === 0 && canFillOneStar" class="button-row" >
+        <button mat-icon-button>
+            <mat-icon aria-label="icon-button">grade</mat-icon>
+        </button>
+        <button mat-icon-button (click)="selectStars(1)">
+            <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+        <button mat-icon-button (click)="selectStars(2)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+    </div>
+    
+    <div *ngIf="detail.expertise === 1" class="button-row" >
+        <button mat-icon-button (click)="selectStars(0)">
+            <i class="material-icons">grade</i>
+        </button>
+        <button mat-icon-button>
+            <i class="material-icons">grade</i>
+        </button>
+        <button mat-icon-button (click)="selectStars(2)">
+            <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="detail.expertise === 2">
+        <button mat-icon-button (click)="selectStars(0)">
+            <i class="material-icons">grade</i>
+        </button>
+        <button mat-icon-button (click)="selectStars(1)">
+            <i class="material-icons">grade</i>
+        </button>
+        <button mat-icon-button>
+            <i class="material-icons">grade</i>
+        </button>                
+    </div>             
+        
+      <mat-form-field *ngIf="windows.createTopicAndDetail">
+        <textarea [(value)]="detail.description" matInput placeholder="description" name="description"></textarea>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-button  
+                (click)="addDetail()" [disabled]="addDetailForm.invalid || unselectedStars" class="btn btn-success">Agregar</button>
+        <button mat-button (click)="cancelTopicCreation()">Cancelar</button>
+     </div>
+    </div>
+
+    <div [formGroup]="addDetailAndTopicForm" *ngIf="windows.createTopicAndDetail">
+      <h2>Crear Tema</h2>
+      <mat-form-field>
+        <input [(ngModel)]="detail.topic" matInput placeholder="Nombre" name="topic" formControlName="topic" required>
+      </mat-form-field>
+      <br>
+      <p style="color:red;" *ngIf="detailExists">El Detalle ya existe</p>
+      <p style="color:red;" *ngIf="topicExists">El Tema ya existe</p>
+      <div *ngIf="detail.expertise === undefined || (!this.canFillOneStar && detail.expertise === 0)" class="button-row" >
+        <button mat-icon-button (click)="selectStars(0)">
+            <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+        <button mat-icon-button (click)="selectStars(1)">
+            <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+        <button mat-icon-button (click)="selectStars(2)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+        </button>
+        </div>
+
+        <div *ngIf="detail.expertise === 0 && canFillOneStar" class="button-row" >
+            <button mat-icon-button>
+                <mat-icon aria-label="icon-button">grade</mat-icon>
+            </button>
+            <button mat-icon-button (click)="selectStars(1)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+            <button mat-icon-button (click)="selectStars(2)">
+                    <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="detail.expertise === 1" class="button-row" >
+            <button mat-icon-button (click)="selectStars(0)">
+                <i class="material-icons">grade</i>
+            </button>
+            <button mat-icon-button>
+                <i class="material-icons">grade</i>
+            </button>
+            <button mat-icon-button (click)="selectStars(2)">
+                <mat-icon aria-label="icon-button">star_border</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="detail.expertise === 2">
+            <button mat-icon-button (click)="selectStars(0)">
+                <i class="material-icons">grade</i>
+            </button>
+            <button mat-icon-button (click)="selectStars(1)">
+                <i class="material-icons">grade</i>
+            </button>
+            <button mat-icon-button>
+                <i class="material-icons">grade</i>
+            </button>                
+        </div>        
+      <br>  
+      <mat-form-field *ngIf="windows.createTopicAndDetail">
+        <textarea [(ngModel)]="detail.description" matInput placeholder="Descripcion" formControlName="description" name="description"></textarea>
+      </mat-form-field>
+      <br>
+      <p  class="warn-banner" style="color:#9F6000;" *ngIf="addDescription">Adicionalmente ingrese la descripcion para crear el tema</p>  
+      <div class="button-row">
+        <button mat-raised-button [disabled]="addDetailAndTopicForm.invalid || unselectedStars"
+                 (click)="addDetailAndTopic()" type="submit"class="btn btn-success">Crear</button>
+        <button mat-button (click)="cancelTopicCreation()" >Cancelar</button>
+     </div>
+    </div>
+</form>
+
+

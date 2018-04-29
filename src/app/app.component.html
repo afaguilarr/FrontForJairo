@@ -1,0 +1,8 @@
+<nav class="nav">
+    <ul>
+      <li [class.active]="checkSelected(0)" (click)="changeTab(0)"><a mat-button routerLink="topics-to-teach" class="mat-typography title">Temas para Enseñar</a></li>
+      <li [class.active]="checkSelected(1)" (click)="changeTab(1)"><a mat-button routerLink="topics-to-learn" class="mat-typography title">Temas para Aprender</a></li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
+
